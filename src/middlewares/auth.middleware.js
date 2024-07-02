@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { jwt_secret } from '../config/env-config.js'
+import config from '../config/env-config.js'
 
 const authMiddleware = (req, res, next) => {
     const token = req.header('Authorization').replace('Bearer ', '');
@@ -8,7 +8,7 @@ const authMiddleware = (req, res, next) => {
     }
 
     try {
-        const decoded = jwt.verify(token, jwt_secret);
+        const decoded = jwt.verify(token, config.jwt_secret);
         req.user = decoded;
         next();
     } catch (error) {
