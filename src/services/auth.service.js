@@ -1,7 +1,8 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import UserRepository from '../repositories/user.repository.js';
-import config from '../config/env-config.js'
+import config from '../config/env-config.js';
+
 class AuthService {
     async signup(userData) {
         const { email, password } = userData;
@@ -27,7 +28,17 @@ class AuthService {
             throw new Error('Invalid email or password');
         }
 
-        const token = jwt.sign({ id: user._id }, config.jwt_secret, { expiresIn: '1h' });
+        const token = jwt.sign(
+            {
+                id: user._id,
+                first_name: user.first_name,
+                last_name: user.last_name,
+                email: user.email
+            },
+            config.jwt_secret,
+            { expiresIn: '1h' }
+        );
+
         return { user, token };
     }
 }
