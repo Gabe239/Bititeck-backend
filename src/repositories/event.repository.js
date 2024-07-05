@@ -12,7 +12,14 @@ class EventRepository {
 
     async findEventById(id) {
         try {
-            return await eventModel.findById(id).populate('ticketDetails').exec();
+            return await eventModel.findById(id)
+                .populate({
+                    path:'ticketDetails',
+                    populate: {
+                        path: 'sector',
+                        model: 'sectors'
+                    }
+                }).exec();
         } catch (error) {
             throw new Error(`Unable to find event by ID: ${error.message}`);
         }
