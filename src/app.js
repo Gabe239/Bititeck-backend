@@ -19,6 +19,9 @@ import authRouter from './routes/auth.router.js';
 import eventRouter from './routes/event.router.js';
 import ticketRouter from './routes/ticket.router.js';
 import sectorRouter from './routes/sector.router.js';
+import cartRouter from './routes/cart.router.js';
+import orderRouter from './routes/order.router.js';
+
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -28,5 +31,7 @@ app.use('/api/auth', authRouter);
 app.use('/api/event', eventRouter);
 app.use('/api/ticket', ticketRouter);
 app.use('/api/sector', sectorRouter);
+app.use('/api/cart', cartRouter)
+app.use('/api/orders', orderRouter);
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
