@@ -6,8 +6,7 @@ const orderSchema = new mongoose.Schema({
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'users', required: true },
     tickets: [{ type: mongoose.Schema.Types.ObjectId, ref: 'tickets', required: true }],
     totalPrice: { type: Number, required: true },
-    status: { type: String, required: true, default: 'pending' }, 
-}, {
+    status: { type: String, enum: ['pending', 'paid', 'cancelled'], default: 'pending' },}, {
     timestamps: true
 });
 

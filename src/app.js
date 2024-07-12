@@ -32,6 +32,6 @@ app.use('/api/event', eventRouter);
 app.use('/api/ticket', ticketRouter);
 app.use('/api/sector', sectorRouter);
 app.use('/api/cart', cartRouter)
-app.use('/api/orders', orderRouter);
+app.use('/api/order', orderRouter);
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
