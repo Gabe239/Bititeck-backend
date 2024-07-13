@@ -12,7 +12,10 @@ class OrderRepository {
 
     async findOrderById(id) {
         try {
-            return await orderModel.findById(id).populate('tickets').exec();
+            return await orderModel.findById(id).populate({
+                path: 'tickets',
+                populate: { path: 'sector', model: 'sectors' }
+            }).exec();
         } catch (error) {
             throw new Error(`Unable to find order by ID: ${error.message}`);
         }

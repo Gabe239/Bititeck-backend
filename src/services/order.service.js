@@ -13,6 +13,7 @@ class OrderService {
 
             const orderData = {
                 user: userId,
+                event: cart.event,
                 tickets: ticketIds, 
                 totalPrice: cart.totalPrice,
                 status: 'pending'
@@ -59,8 +60,8 @@ class OrderService {
             const session = await stripe.checkout.sessions.create({
                 line_items: lineItems,
                 mode: 'payment',
-                success_url: 'http://localhost:3000/success',
-                cancel_url: 'http://localhost:3000/cancel',
+                success_url: `http://localhost:4200/buy/tickets/${order.event.toString()}/${orderId}`,
+                cancel_url: 'http://localhost:4200/',
             });
 
             return session;

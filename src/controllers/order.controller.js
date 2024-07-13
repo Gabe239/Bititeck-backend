@@ -62,7 +62,7 @@ export async function createPaymentSession(req, res) {
     try {
         const { orderId } = req.body; 
         const session = await OrderService.createPaymentSession(orderId);
-        res.status(200).json({ sessionId: session.id });
+        res.status(200).json({ sessionId: session.id, paymentUrl: session.url });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

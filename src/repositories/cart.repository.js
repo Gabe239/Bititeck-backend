@@ -12,7 +12,13 @@ class CartRepository {
 
     async findCartByUserId(userId) {
         try {
-            return await cartModel.findOne({ user: userId }).populate('tickets').exec();
+            return await cartModel.findOne({ user: userId }).populate({
+                path: 'tickets',
+                populate: {
+                    path: 'sector',
+                    model: 'sectors'
+                }
+            }).exec();
         } catch (error) {
             throw new Error(`Unable to find cart by user ID: ${error.message}`);
         }
